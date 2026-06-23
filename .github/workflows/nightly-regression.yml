@@ -1,0 +1,41 @@
+name: Nightly Regression & Telemetry
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Runs at 2 AM UTC every night
+
+jobs:
+  nightly-run:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+        
+    - name: Start Grid & Observability
+      run: docker-compose -f docker-compose.yml -f observability/docker-compose-elk.yml up -d
+      
+    - name: Run Full P1 Regression Suite (All Modules)
+      run: |
+        mvn test -pl qe-api -DsuiteXmlFile=src/test/resources/suites/regression.xml -Denv=qa -Dheadless=true || true
+        mvn test -pl qe-ui -DsuiteXmlFile=src/test/resources/suites/regression.xml -Denv=qa -Dheadless=true || true
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Run Flaky Detection (Shadow Mode)
+      run: |
+        pip install -r qe-intelligence/requirements.txt
+        python qe-intelligence/src/flaky_detector.py
+        python qe-intelligence/src/quarantine_manager.py --audit-mode
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
