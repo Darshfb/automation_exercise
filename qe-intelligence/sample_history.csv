@@ -1,0 +1,11 @@
+test_name,execution_date,status
+testValidLoginApi,2026-05-01,PASS
+testValidLoginApi,2026-05-02,FAIL
+testValidLoginApi,2026-05-03,PASS
+testValidLoginApi,2026-05-04,FAIL
+testValidLoginApi,2026-05-05,PASS
+testRegisterUser,2026-05-01,PASS
+testRegisterUser,2026-05-02,PASS
+testRegisterUser,2026-05-03,PASS
+testRegisterUser,2026-05-04,PASS
+testRegisterUser,2026-05-05,PASS

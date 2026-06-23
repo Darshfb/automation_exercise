@@ -1,0 +1,42 @@
+name: System Determinism Stress Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      parallel_count:
+        description: 'Number of parallel grid sessions'
+        required: true
+        default: '50'
+
+jobs:
+  stress-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+        
+    - name: Scale Selenium Grid
+      run: |
+        docker-compose up -d
+        docker-compose up -d --scale chrome=${{ github.event.inputs.parallel_count }}
+        
+    - name: Run Analytics Orchestrator
+      run: |
+        python qe-intelligence/scripts/local_stress_runner.py --iterations 20 --threads 1,2,4
+        
+    - name: Aggregate Intelligence Metrics
+      run: |
+        python qe-intelligence/scripts/metrics_aggregator.py
+        
+    - name: Upload Analytics Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: analytics-report
+        path: qe-intelligence/data/analytics_report.json

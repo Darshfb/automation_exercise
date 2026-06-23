@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "total_runs_analyzed": 60,
+    "total_unique_tests": 20,
+    "total_test_executions": 889
+  },
+  "execution_performance": {
+    "average_time_sec": 505.0,
+    "median_time_sec": 140.71,
+    "p95_time_sec": 389.91,
+    "standard_deviation_sec": 1957.19
+  },
+  "reliability_metrics": {
+    "overall_pass_rate_percent": 89.09,
+    "flaky_test_count": 17,
+    "flaky_rate_percent": 85.0,
+    "flaky_tests": [
+      "qe-api.setup",
+      "qe-api.testCreateExistingAccountApi",
+      "qe-api.testDeleteAccountApi",
+      "qe-api.testGetUserDetailApi",
+      "qe-api.testInvalidLoginUnregisteredEmailApi",
+      "qe-api.testInvalidLoginWrongPasswordApi",
+      "qe-api.testUpdateAccountApi",
+      "qe-api.testValidLoginApi",
+      "qe-api.testGetAllBrandsApi",
+      "qe-api.testGetAllProductsApi",
+      "qe-api.testSearchExistingProductApi",
+      "qe-api.testSearchNonExistingProductApi",
+      "qe-ui.setupTest",
+      "qe-ui.testSearchProduct",
+      "qe-ui.testViewAllProducts",
+      "qe-ui.testLoginValidUser",
+      "qe-ui.testRegisterUser"
+    ]
+  },
+  "intelligence_projections": {
+    "tia_assumed_reduction_percent": 60,
+    "projected_avg_time_with_tia_sec": 202.0,
+    "projected_time_savings_per_run_sec": 303.0
+  }
+}

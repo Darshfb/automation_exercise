@@ -1,0 +1,8 @@
+{
+  "tests": [
+    {"name": "testValidLoginApi", "type": "API", "duration_sec": 1.2},
+    {"name": "testRegisterUser", "type": "UI_CHROME", "duration_sec": 8.5},
+    {"name": "testSearchExistingProductApi", "type": "API", "duration_sec": 0.8},
+    {"name": "testViewAllProducts", "type": "UI_CHROME", "duration_sec": 4.1}
+  ]
+}

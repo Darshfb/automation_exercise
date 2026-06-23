@@ -1,0 +1,29 @@
+name: Release Gate Load Validation
+
+on:
+  workflow_dispatch: # Triggered manually by DevOps or prior to Prod deployment
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  load-testing:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+        
+    - name: Execute Gatling Performance Gate
+      run: mvn gatling:test -pl qe-load
+      
+    - name: Enforce SLA Boundaries
+      run: |
+        echo "Gatling plugin natively enforces SLAs via the assertions in BasicLoadSimulation.java"
+        echo "If response time > 3s or failure rate > 5%, this job will fail the release."

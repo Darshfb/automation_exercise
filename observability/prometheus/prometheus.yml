@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'selenium-grid'
+    static_configs:
+      - targets: ['selenium-router:4444']
+    metrics_path: '/graphql'
+    # In a real setup, we would use a Prometheus exporter for Selenium Grid 4.
+    # Selenium 4 exposes a GraphQL endpoint, but community exporters like 
+    # selenium-grid-exporter translate this to Prometheus format.
+    # For MVP, we point to the exporter (which we'd add) or use a basic metrics endpoint if available.
+    
+  - job_name: 'qe-platform'
+    static_configs:
+      # Placeholder for custom metrics endpoint from our orchestration engine
+      - targets: ['host.docker.internal:8080']

@@ -1,0 +1,6 @@
+pandas==2.2.2
+scikit-learn==1.4.2
+networkx==3.3
+requests==2.31.0
+pytest==8.2.0
+elasticsearch==8.13.0

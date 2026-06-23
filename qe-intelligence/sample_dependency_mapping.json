@@ -1,0 +1,5 @@
+{
+  "src/main/java/core/AuthService.java": ["com.automationexercise.qe.api.tests.smoke.AuthApiSmokeTests", "com.automationexercise.qe.ui.tests.smoke.AuthSmokeTests"],
+  "src/main/java/ui/CartComponent.java": ["com.automationexercise.qe.ui.tests.smoke.CartSmokeTests", "com.automationexercise.qe.ui.tests.smoke.CheckoutSmokeTests"],
+  "src/main/java/api/ProductController.java": ["com.automationexercise.qe.api.tests.smoke.ProductsApiSmokeTests", "com.automationexercise.qe.ui.tests.smoke.ProductsSmokeTests"]
+}
