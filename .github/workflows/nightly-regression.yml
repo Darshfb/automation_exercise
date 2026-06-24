@@ -2,7 +2,7 @@ name: Nightly Regression & Telemetry
 
 on:
   schedule:
-    - cron: '0 2 * * *' # Runs at 2 AM UTC every night
+    - cron: '0 2 * * *'
 
 jobs:
   nightly-run:
@@ -19,7 +19,7 @@ jobs:
         cache: maven
         
     - name: Start Grid & Observability
-      run: docker-compose -f docker-compose.yml -f observability/docker-compose-elk.yml up -d
+      run: docker compose -f docker-compose.yml -f observability/docker-compose-elk.yml up -d
       
     - name: Run Full P1 Regression Suite (All Modules)
       run: |

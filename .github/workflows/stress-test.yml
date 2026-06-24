@@ -21,11 +21,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
         
     - name: Scale Selenium Grid
       run: |
-        docker-compose up -d
-        docker-compose up -d --scale chrome=${{ github.event.inputs.parallel_count }}
+        docker compose up -d --scale chrome=${{ github.event.inputs.parallel_count }}
         
     - name: Run Analytics Orchestrator
       run: |
